@@ -4,4 +4,4 @@ mkdir /mnt/{proc,dev,sys,var/lib/pacman}
 mount -o bind /dev /mnt/dev
 mount -t sysfs none /mnt/sys
 mount -t proc none /mnt/proc
-pacman -r /mnt -Sy base btrfs-progs haveged vim-minimal
+pacman --noconfirm -r /mnt -S base btrfs-progs haveged vim-minimal

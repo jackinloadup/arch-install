@@ -7,8 +7,10 @@ chroot /mnt locale-gen
 chroot /mnt haveged -w 1024
 
 cat yaourt-pacman-append >> /mnt/etc/pacman.conf
+sed -i '/^#pitt.edu/s/^#//' /mnt/etc/pacman.d/mirrorlist
+sed -i '/^#mtu.edu/s/^#//' /mnt/etc/pacman.d/mirrorlist
 chroot /mnt pacman-key --init
 chroot /mnt pacman-key --populate archlinux
 chroot /mnt pkill haveged
-chroot /mnt pacman -Syy yaourt
+chroot /mnt pacman --noconfirm -Syy yaourt
 

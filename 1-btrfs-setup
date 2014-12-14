@@ -4,7 +4,7 @@ pacman -Sy gptfdisk btrfs-progs
 gdisk /dev/sda
 
 mkfs.vfat -F 32 /dev/sda1
-mkfs.btrfs -L ArchHDD /dev/sda2
+mkfs.btrfs -f -L ArchHDD /dev/sda2
 mkdir /btrfs
 mount -o defaults,noatime /dev/sda2 /btrfs
 btrfs sub create /btrfs/__active
