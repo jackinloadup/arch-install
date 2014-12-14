@@ -1,0 +1,14 @@
+#!/bin/sh
+
+cp /etc/resolv.conf /mnt/etc/resolv.conf
+ln -s /root/thinkpad-install /mnt/root/thinkpad-install
+sed -i '/^#en_US.UTF-8/s/^#//' /mnt/etc/locale.gen
+chroot /mnt locale-gen
+chroot /mnt haveged -w 1024
+
+cat yaourt-pacman-append >> /mnt/etc/pacman.conf
+chroot /mnt pacman-key --init
+chroot /mnt pacman-key --populate archlinux
+chroot /mnt pkill haveged
+chroot /mnt pacman -Syy yaourt
+

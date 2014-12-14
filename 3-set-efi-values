@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "initrd=\initramfs-linux.img root=/dev/sda2 ro" | iconv -f ascii -t ucs2 | efibootmgr --create --gpt --disk /dev/sda --part 1  --label "Arch Linux" --loader '\vmlinuz-linux' --append-binary-args -
+echo "initrd=\initramfs-linux-fallback.img root=/dev/sda2 ro" | iconv -f ascii -t ucs2 | efibootmgr --create --gpt --disk /dev/sda --part 1  --label "Arch Linux Fallback" --loader '\vmlinuz-linux' --append-binary-args -

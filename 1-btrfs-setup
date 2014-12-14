@@ -1,0 +1,19 @@
+#!/bin/sh
+
+pacman -Sy gptfdisk btrfs-progs
+gdisk /dev/sda
+
+mkfs.vfat -F 32 /dev/sda1
+mkfs.btrfs -L ArchHDD /dev/sda2
+mkdir /btrfs
+mount -o defaults,noatime /dev/sda2 /btrfs
+btrfs sub create /btrfs/__active
+## btrfs subvolume create /btrfs/__active/home
+## btrfs subvolume create /btrfs/__active/usr
+## btrfs subvolume create /btrfs/__active/var
+mount -o subvol=__active /dev/sda2 /mnt
+mkdir /btrfs/boot /mnt/boot
+mount /dev/sda1 /btrfs/boot
+mount --bind /btrfs/boot /mnt/boot
+mkdir -p /mnt/var/lib/ArchHDD /btrfs/__snapshot
+chmod -R 0755 /btrfs/__active

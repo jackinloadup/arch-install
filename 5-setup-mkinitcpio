@@ -1,0 +1,3 @@
+#!/bin/sh
+chroot /mnt yaourt -S mkinitcpio-btrfs
+chroot /mnt vim /etc/mkinitcpio.conf
